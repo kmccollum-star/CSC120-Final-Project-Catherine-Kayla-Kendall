@@ -20,8 +20,8 @@ public class Game {
         System.out.println();
 
         this.route = new Building[] {
-            new AinsworthGym()
-            // new TylerHouse()
+            new AinsworthGym(),
+            new Tyler()
             // new SeelyeHall()
             // new SmithArtMuseum
         };
