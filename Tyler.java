@@ -15,28 +15,58 @@ public class Tyler extends Building {
     @Override
 
     public void play (Player player, Scanner input){
+        if (player.hasVisitedTylerLivingRoom() &&
+        player.hasVisitedTylerBasement() &&
+        player.hasVisitedTylerDiningHall()) {
+
+        System.out.println("You've already searched every corner of Tyler.");
+        System.out.println("There isn't anything left to find here.");
+        return;
+    }
+        
         System.out.println ("You observe the cozy lobby of Tyler house and see...");
-        System.out.println("1) A large arched door frame leading into the living room");
-        System.out.println("2) A creepy staircase leading into the basement");
-        System.out.println("3) A dark hallway leading into the dining room");
+        System.out.println("1) A large arched door frame leading into the living room" + (player.hasVisitedTylerLivingRoom() ? " (already searched)" : ""));
+        System.out.println("2) A creepy staircase leading into the basement" + (player.hasVisitedTylerBasement() ? " (already searched)" : ""));
+        System.out.println("3) A dark hallway leading into the dining room" + (player.hasVisitedTylerDiningHall() ? " (already searched)" : ""));
 
         System.out.println("Where do you wish to explore?");
         String choice =  input.nextLine();
 
-        switch (choice){
-            case "1" -> exploreLivingRoom (player, input);
-            case "2" -> exploreTylerBasement (player, input);
-            case "3" -> exploreTylerCafeteria (player, input);
-            default -> {
-                System.out.println("You hesitate for too long... ");
-                System.out.println("A zombie bursts through the door behind you and mauls you to death");
-                player.changeHealth(-100);
-                System.out.println("You are now dead.");
-
-            //What happens when a user input something that isnt in the choices?
-                
+        switch (choice) {
+        case "1" -> {
+            if (player.hasVisitedTylerLivingRoom()) {
+                System.out.println("You've already ransacked the living room. Nothing new here.");
+                // back to choice menu so they can pick a different path
+                play(player, input);
+            } else {
+                player.setVisitedTylerLivingRoom(true);
+                exploreLivingRoom(player, input);
             }
         }
+        case "2" -> {
+            if (player.hasVisitedTylerBasement()) {
+                System.out.println("You've already explored the basement. It's just dust and bad vibes now.");
+                play(player, input);
+            } else {
+                player.setVisitedTylerBasement(true);
+                exploreTylerBasement(player, input);
+            }
+        }
+        case "3" -> {
+            if (player.hasVisitedTylerDiningHall()) {
+                System.out.println("You've already scavenged the dining hall. No food left, just crumbs.");
+                play(player, input);
+            } else {
+                player.setVisitedTylerDiningHall(true);
+                exploreTylerCafeteria(player, input);
+            }
+        }
+        default -> {
+            System.out.println("You stand frozen in the lobby, wasting precious time.");
+            System.out.println("Better pick a real option.");
+            play(player, input);
+        }
+    }
     }
 
     //Living Room Path
@@ -216,6 +246,7 @@ public class Tyler extends Building {
             }
         }
     }
+
 }
 
 

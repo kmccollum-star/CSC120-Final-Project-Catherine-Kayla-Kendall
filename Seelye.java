@@ -22,8 +22,9 @@ public class Seelye extends Building {
         //must have map and collect survivor for next step
         System.out.println("2: Explore the Jacobsen Center (hint: may find a map here).");//will find map in jacobsen center
         System.out.println("3: Explore the Spinelli Center.");
+        System.out.println("4: Go back to Tyler to grab more supplies");
 
-        System.out.println("Where do you want to go? (1/2/3)");
+        System.out.println("Where do you want to go? (1/2/3/4)");
 
         String choice = input.nextLine();
 
@@ -31,6 +32,15 @@ public class Seelye extends Building {
             case "1" -> exploreBasement(player, input);
             case "2" -> exploreJacobsen(player, input);
             case "3" -> exploreSpinelli(player, input);
+            case "4" -> {
+            System.out.println("You decide to return to Tyler to grab more supplies.");
+
+            Tyler tyler = new Tyler();
+            tyler.play(player, input);  //
+            System.out.println("After checking Tyler, you make your way back to Seelye...\n");
+            play(player, input);        // back to Seelye menu
+            return;
+        }
             //def need to change this part
             default -> {
                 System.out.println("You freeze, unable to decide where to go to next, you hear groaning in the distance. The groans get closer...");

@@ -4,6 +4,9 @@ public class Player {
     private String name;
     private int health;
     ArrayList<String> weapons;
+    private boolean visitedTylerLivingRoom;
+    private boolean visitedTylerBasement;
+    private boolean visitedTylerDiningHall;
 
     public Player(String name, int startingHealth) {
         this.name = name;
@@ -45,4 +48,32 @@ public class Player {
             System.out.println("This weapon cannot be removed");
         }
     }
+    public boolean hasVisitedTylerLivingRoom() {
+        return visitedTylerLivingRoom;
+    }
+
+    public void setVisitedTylerLivingRoom(boolean visited) {
+        this.visitedTylerLivingRoom = visited;
+    }
+
+    public boolean hasVisitedTylerBasement() {
+        return visitedTylerBasement;
+    }
+
+    public void setVisitedTylerBasement(boolean visited) {
+        this.visitedTylerBasement = visited;
+    }
+
+    public boolean hasVisitedTylerDiningHall() {
+        return visitedTylerDiningHall;
+    }
+
+    public void setVisitedTylerDiningHall(boolean visited) {
+        this.visitedTylerDiningHall = visited;
+    }
+
 }
+
+
+
+
